@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <title>Com php</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="form.css">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+    <body class="bdy">
+        <div class="forms">
+            <h2 class="title">Cadastrar</h2>
+
+            <label for="username">Usuário</label>
+            <div class="input">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input id="username" name="username" placeholder="Username" type="text">
+            </div>
+            <label for="senha">Senha</label>
+            <div class="input">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input id="senha" name="senha" placeholder="Senha" type="password">
+            </div>
+            <label for="celular">Celular</label>
+            <div class="input">
+                <i class="fa fa-mobile" aria-hidden="true"></i>
+                <input id="celular" name="celular" placeholder="(00) 00000-0000" type="number"
+                    pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+            </div>
+            <label for="instagram">Instagram</label>
+            <div class="input">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <input id="instagram" name="instagram" placeholder="@Instagram" type="text">
+            </div>
+
+            <label for="equipe">Equipe</label>
+            <div class="input"><i class="fa fa-user"></i>
+                <select class="esc" name="equipe" id="equipe">
+
+                    <option value="N/A" disabled selected>Escolher Grupo</option>
+                    <option value="Alpha">Grupo Alpha</option>
+                    <option value="Bravo">Grupo Bravo </option>
+                    <option value="Delta">Grupo Delta</option>
+                    <option value="Charlie">Grupo Charlie </option>
+                    <option value="Echo">Grupo Echo </option>
+                </select>
+
+
+            </div>
+
+            <div id="btn">
+                <button type="submit" onclick="cadastrar()">Cadastrar</button>
+            </div>
+
+            <div class="text-center p-t-115">
+                <span class="txt1">
+                    Você já tem uma conta?<br>
+                    <button onclick="" type="submit"> test </button>
+                </span>
+
+                <a class="txt2" href="login.html">
+                    Faça Login
+                </a>
+            </div>
+
+        </div>
+        <form>
+            <div class="mudar_cor" id="123">
+                <button class="mudar" name="mudar" type="submit">Mudar Cor</button>
+            </div>
+            <footer>
+                <p>© Todos direitos reservados a Ryan Luis Cordeiro</p>
+            </footer>
+
+
+
+            <script src="script.js">
+            </script>
+
+    </body>
+
+</html>
