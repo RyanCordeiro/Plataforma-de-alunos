@@ -1,19 +1,3 @@
-/*const Sequelize = require('sequelize');
-const sequelize = new Sequelize('alunos', 'root', '', {
-  host: "localhost",
-  dialect: "mysql"
-});
-sequelize.authenticate().then(function () { console.log("conectado com sucesso!") }).catch(function (erro) {
-  console.log("Falha ao se concetar:" + erro)
-})
-*/
-// reeadline
-const readlineSync = require('readline-sync');
-const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 
 //
@@ -36,7 +20,6 @@ connection.connect(function (err) {
 
 
 
-
 //pega os valors do DOM
 function cadastrar() {
   // matricula aleatroria 
@@ -49,10 +32,10 @@ function cadastrar() {
   var celular = (document.getElementById('celular')).value;
   var instagram = (document.getElementById('instagram')).value;
   var equipe = (document.getElementById('equipe')).value;
-  //var idade = '20';
+  // var idade = '20';
   var matriculaJS = numeroFormatado;
-  // inserir as caracanetriscas no banco de dados
-  const inserir = 'INSERT INTO alunos VALUES (NULL, ?, ?, ?, ?, ?, ?)';
+
+  
   console.log('nome ' + name);
   console.log('senha ' + senha);
   console.log('celular ' + celular);
@@ -60,17 +43,25 @@ function cadastrar() {
   console.log('equipe ' + equipe);
   console.log('matricula ' + matriculaJS);
 
+  // enviar para o php que envia as coisas 
+   // Faz a requisição POST para o arquivo PHP com os dados dos campos de entrada
+   var xhr = new XMLHttpRequest();
+   xhr.open('POST', 'Js_para_php_BD.php');
+   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   xhr.onload = function() {
+     if (xhr.status === 200) {
+       alert('Dados enviados com sucesso!');
+     }
+     else {
+       alert('Erro ao enviar os dados: ' + xhr.status);
+     }
+   };
+   xhr.send('username=' + name + '&senha=' + senha + '&celular=' + celular + '&instagram=' + instagram + '&equipe=' + equipe);
+ 
+// inserir as caracanetriscas no banco de dados
 
-
-  var xhr = new XMLHttpRequest();
-  // Configura a solicitação
-  xhr.open('GET', 'script2.php?matriculaPHP=' + matriculaJS);
-  // Envia a solicitação
-  xhr.send();
-}
-
-
-/*connection.query(inserir, [name, senha, celular, instagram, equipe, matricula], function (error, results, fields) {
+  const inserir = 'INSERT INTO alunos VALUES (NULL, ?, ?, ?, ?, ?, ?)';
+connection.query(inserir, [name, senha, celular, instagram, equipe, matriculaJS], function (error, results, fields) {
   if (error) {
     console.error('Erro ao inserir: ' + error.stack);
     return;
@@ -78,5 +69,5 @@ function cadastrar() {
   console.log('Registro inserido com sucesso!');
 });
 connection.end 
-}     */
-//recebe matricula do php atraves do json
+} 
+  
