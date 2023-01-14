@@ -3,16 +3,15 @@
 
 <head>
 
-    <title>Formulario Com PHP</title>
+    <title>painel de controle</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="form.css">
     <!--===============================================================================================-->
 </head>
 
 <body>
-
-    <body class="bdy">
-        <div class="forms">
+  <body class="bdy">
+    <div class="forms">
             <h2 class="title">Cadastrar</h2>
 
             <label for="username">Usuário</label>
@@ -41,12 +40,12 @@
             <div class="input"><i class="fa fa-user"></i>
                 <select class="esc" name="equipe" id="equipe">
 
-                    <option value="N/A" disabled selected>Escolher Grupo</option>
-                    <option value="Alpha">Grupo Alpha</option>
-                    <option value="Bravo">Grupo Bravo </option>
-                    <option value="Delta">Grupo Delta</option>
-                    <option value="Charlie">Grupo Charlie </option>
-                    <option value="Echo">Grupo Echo </option>
+                    <option value="" disabled selected>Escolher Grupo</option>
+                    <option value="">Grupo Alpha</option>
+                    <option value="">Grupo Bravo </option>
+                    <option value="">Grupo Delta</option>
+                    <option value="">Grupo Charlie </option>
+                    <option value="">Grupo Echo </option>
                 </select>
 
 
@@ -55,7 +54,7 @@
             <div id="btn">
                 <button type="submit" onclick="cadastrar()">Cadastrar</button>
             </div>
-
+            
             <div class="text-center p-t-115">
                 <span class="txt1">
                     Você já tem uma conta?<br>
@@ -65,21 +64,19 @@
                     Faça Login
                 </a>
             </div>
-
-        </div>
-        <form>
-            <div class="mudar_cor" id="123">
-                <button class="mudar" name="mudar" type="submit">Mudar Cor</button>
-            </div>
-            <footer>
-                <p>© Todos direitos reservados a Ryan Luis Cordeiro</p>
-            </footer>
+    </div>
+    <div class="mudar_cor" id="123">
+        <button class="mudar" name="mudar" type="submit">Mudar Cor</button>
+    </div>
+    <footer>
+    <p>© Todos direitos reservados a Ryan Luis Cordeiro</p>
+</footer>
 
 
 
-            <script src="script.js">
-            </script>
 
-    </body>
-
+<script src="script.js" src="script2.php">
+    
+</script>
+</body>
 </html>

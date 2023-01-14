@@ -1,27 +1,29 @@
 
-
 //
-const mysql = require('mysql2');
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'Alunos'
-});
-connection.connect(function (err) {
-  if (err) {
-    console.error('Erro ao conectar: ' + err.stack);
-    return;
-  }
-  console.log('Conectado com ID: ' + connection.threadId);
-});
 
 
-
+function conecção() {
+  const mysql = require('mysql2');
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'Alunos'
+  });
+  connection.connect(function (err) {
+    if (err) {
+      console.error('Erro ao conectar: ' + err.stack);
+      return;
+    }
+    console.log('Conectado com ID: ' + connection.threadId);
+  });
+};
 
 
 //pega os valors do DOM
 function cadastrar() {
+  //conecção primeiro sempre
+  conecção()
   // matricula aleatroria 
   let numeroRandomico = Math.floor(Math.random() * 100000000);
   let numeroFormatado = numeroRandomico.toString().padStart(8, '0');
@@ -70,46 +72,65 @@ function cadastrar() {
   });
   connection.end
 }
-
 function logar() {
 
+
   //input do usario html
-  const nomeInformado = (document.getElementById('usuario')).value;
-  const senhaInformada = (document.getElementById('senha')).value;
+  let nomeInformado = (document.getElementById('usuario')).value;
+  let senhaInformada = (document.getElementById('senha')).value;
   console.log(nomeInformado, senhaInformada);
   alert('Clickado, esperando confirmação')
   // enviar para o php verificar se esta certo
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'login.php');
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      alert('Dados enviados com sucesso!');
+  fetch('login.php', {
+    method: 'POST',
+    body: `username=${nomeInformado}&senha=${senhaInformada}`,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
-    else {
-      alert('Erro ao enviar os dados: ' + xhr.status);
-    }
-  };
-  xhr.send('username=' + nomeInformado + '&senha=' + senhaInformada);
+  })
+    /*
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'login.php');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        alert('Dados enviados com sucesso!');
+      }
+      else {
+        alert('Erro ao enviar os dados: ' + xhr.status);
+      }
+    };
+    xhr.send('username=' + 'RyanLuis' + '&senha=' + '303204171');
+  */
 
-
-  //retorno do php se sim esta certo ou nao
-  fetch('login.php')
+    //retorno do php se sim esta certo ou nao
     .then(response => response.json())
-    .then(login => {
+    .then(result => {
+      var login = result[0];
+
+      var nome = result[1];
+      var senha = result[2];
+
+      console.log(login, nome, senha);
       if (login == true) {
-        console.log('Logado')
         // Código a ser executado se LOGIN for verdadeiro
+        alert('Logado')
+        window.location.assign('painel de controle/painel_adm.html');
+
       } else {
         // Código a ser executado se login for falso
-        console.log('Tente Novamente')
+        alert('Tente Novamente')
       }
     })
     .catch(error => {
       console.log(error);
       // Código a ser executado se houver um erro ao fazer o parse da resposta
     });
+  // codigo para imprimir na tela o nome do usuario e tudo mais
 
+ 
+
+  //////////fim do codigo para imprimir o nome e tudo mais
   ////////////////////////////node ///////////////////////
   // conecção javascrip para node.js
   connection.query('SELECT nome, senha FROM alunos', function (error, resultados, fields) {
@@ -122,3 +143,28 @@ function logar() {
   connection.end();
   ///////////////////////NODE/////////////////////
 }
+
+function resultLogin() {
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'login.php');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        alert('Dados enviados com sucesso!');
+      }
+      else {
+        alert('Erro ao enviar os dados: ' + xhr.status);
+      }
+    };
+    xhr.GET(login, nome, senha);
+  
+};
+resultLogin()
+var NomeUsuario = document.getElementById('usuario');
+var CargoUsuario = document.getElementById('Cargo');
+var EquipeUsuario = document.getElementById('Equipe');
+console.log(window.nome)
+
+
+NomeUsuario.innerHTML = ('nome de usuário é ' + window.nome)
